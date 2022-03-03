@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace lab2
 {
-     class RomanNumber : ICloneable, IComparable
+     public class RomanNumber : ICloneable, IComparable
     {
 
         private ushort number_to_calc;
@@ -19,51 +19,48 @@ namespace lab2
             else this.number_to_calc = n;
         }
         //Сложение римских чисел
-        public static RomanNumber Add(RomanNumber? n1, RomanNumber? n2)
+        //Сложение римских чисел
+        public static RomanNumber operator +(RomanNumber? n1, RomanNumber? n2)
         {
             int num = n1.number_to_calc + n2.number_to_calc;
-            if (num <= 0) throw new RomanNumberException("Ошибка! Сумма <= 0");
+            if (num <= 0) throw new RomanNumberException("Не удалось сложить  числа!");
             else
             {
-                RomanNumber result = new((ushort)num);
-                return result;
+                return new RomanNumber((ushort)num);
             }
         }
         //Вычитание римских чисел
-        public static RomanNumber Sub(RomanNumber? n1, RomanNumber? n2)
+        public static RomanNumber operator -(RomanNumber? n1, RomanNumber? n2)
         {
             int num = n1.number_to_calc - n2.number_to_calc;
-            if (num <= 0) throw new RomanNumberException("Ошибка! Разность <= 0");
+            if (num <= 0) throw new RomanNumberException("Результат вычитания меньше либо равен 0!");
             else
             {
-                RomanNumber result = new((ushort)num);
-                return result;
+                return new RomanNumber((ushort)num);
             }
         }
         //Умножение римских чисел
-        public static RomanNumber Mul(RomanNumber? n1, RomanNumber? n2)
+        public static RomanNumber operator *(RomanNumber? n1, RomanNumber? n2)
         {
-            int number = n1.number_to_calc * n2.number_to_calc;
-            if (number <= 0) throw new RomanNumberException("Ошибка! Резльтат умножения <= 0");
+            int num = n1.number_to_calc * n2.number_to_calc;
+            if (num <= 0) throw new RomanNumberException("Не удалось умножить 2 числа!");
             else
             {
-                RomanNumber result = new((ushort)number);
-                return result;
+            return new RomanNumber((ushort)num);
             }
         }
-        //Целочисленное деление римских чисел
-        public static RomanNumber Div(RomanNumber? n1, RomanNumber? n2)
-        {
 
-            if (n2.number_to_calc == 0) throw new RomanNumberException("Ошибка! Делитеь равен нулю");
+        //Целочисленное деление римских чисел
+        public static RomanNumber operator /(RomanNumber? n1, RomanNumber? n2)
+        {
+            if (n2.number_to_calc == 0) throw new RomanNumberException("Ошибка деления!");
             else
             {
                 int num = n1.number_to_calc / n2.number_to_calc;
-                if (num <= 0) throw new RomanNumberException("Ошибка! Результат деления <= 0");
+                if (num == 0) throw new RomanNumberException("Ошибка деления!");
                 else
                 {
-                    RomanNumber result = new((ushort)num);
-                    return result;
+                    return new RomanNumber((ushort)num);
                 }
             }
         }
@@ -99,7 +96,5 @@ namespace lab2
             else
                 throw new RomanNumberException("Ошибка! Сравнение не удалось");
         }
-
     }
-
 }
